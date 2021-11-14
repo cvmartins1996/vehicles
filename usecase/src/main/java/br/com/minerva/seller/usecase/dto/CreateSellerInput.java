@@ -19,10 +19,6 @@ public class CreateSellerInput {
         this.cellPhone = cellPhone;
     }
 
-    public CreateSellerInput(){
-
-    }
-
     public String getAreaCode() {
         return areaCode;
     }

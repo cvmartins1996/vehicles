@@ -12,14 +12,19 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 @Path("/sellers")
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 public class SellerResource {
 
     @POST
-    @Produces(MediaType.TEXT_PLAIN)
-    @Consumes(MediaType.APPLICATION_JSON)
-    public String create(CreateSellerInput createSellerInput) {
+    public CreateSellerOutput create(SellerDTO sellerDTO) {
         CreateSeller createSeller = new CreateSeller(new SellerRepositoryFake());
+        CreateSellerInput createSellerInput = new CreateSellerInput(sellerDTO.getFirstName(),
+                                                                    sellerDTO.getLastName(),
+                                                                    sellerDTO.getEmail(),
+                                                                    sellerDTO.getAreaCode(),
+                                                                    sellerDTO.getPhoneNumber());
         CreateSellerOutput output = createSeller.execute(createSellerInput);
-        return output.getStatus();
+        return output;
     }
 }
